@@ -6,8 +6,9 @@ from pyrogram.types import (
     InlineKeyboardButton,
     InlineKeyboardMarkup,
     Message,
+    InputMediaPhoto,
+    InputMediaVideo,
 )
-
 from AnonXMusic import app
 from AnonXMusic.utils.database import (
     add_nonadmin_chat,
@@ -34,7 +35,7 @@ from AnonXMusic.utils.inline.settings import (
     vote_mode_markup,
 )
 from AnonXMusic.utils.inline.start import private_panel
-from config import BANNED_USERS, OWNER_ID
+from config import BANNED_USERS, OWNER_ID, START_IMG_URL
 
 
 @app.on_message(
@@ -43,11 +44,24 @@ from config import BANNED_USERS, OWNER_ID
 @language
 async def settings_mar(client, message: Message, _):
     buttons = setting_markup(_)
-    await message.reply_text(
-        _["setting_1"].format(app.mention, message.chat.id, message.chat.title),
+    await message.reply_photo(
+        photo=START_IMG_URL,
+        caption=_["setting_1"].format(app.mention, message.chat.id, message.chat.title),
         reply_markup=InlineKeyboardMarkup(buttons),
     )
 
+@app.on_callback_query(filters.regex("gib_source") & ~BANNED_USERS)
+@languageCB
+async def gib_repo(client, CallbackQuery, _):
+    await CallbackQuery.edit_message_media(
+        InputMediaVideo("https://telegra.ph/file/3473a79595e79f3a494c0.mp4"),
+        reply_markup=InlineKeyboardMarkup(
+            [
+            [InlineKeyboardButton(text="ᴄʜᴀᴛᴛɪɴɢ ✨", url=f"https://t.me/friendship_forever_group143")],
+            [InlineKeyboardButton(text="➲ ʙᴀᴄᴋ✭", callback_data=f"settingsback_helper")],
+            ]
+        ),
+    )
 
 @app.on_callback_query(filters.regex("settings_helper") & ~BANNED_USERS)
 @languageCB
@@ -76,10 +90,12 @@ async def settings_back_markup(client, CallbackQuery: CallbackQuery, _):
         pass
     if CallbackQuery.message.chat.type == ChatType.PRIVATE:
         await app.resolve_peer(OWNER_ID)
-        OWNER = OWNER_ID
         buttons = private_panel(_)
-        return await CallbackQuery.edit_message_text(
-            _["start_2"].format(CallbackQuery.from_user.mention, app.mention),
+        return await CallbackQuery.edit_message_media(
+            InputMediaPhoto(
+                media=START_IMG_URL,
+            caption=_["start_2"].format(CallbackQuery.from_user.mention, app.mention),
+            ),
             reply_markup=InlineKeyboardMarkup(buttons),
         )
     else:
