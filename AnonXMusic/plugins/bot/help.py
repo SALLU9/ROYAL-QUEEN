@@ -90,3 +90,14 @@ async def helper_cb(client, CallbackQuery, _):
         await CallbackQuery.edit_message_text(helpers.HELP_14, reply_markup=keyboard)
     elif cb == "hb15":
         await CallbackQuery.edit_message_text(helpers.HELP_15, reply_markup=keyboard)
+        
+
+@app.on_callback_query(filters.regex("dilXaditi") & ~BANNED_USERS)
+@languageCB
+async def first_pagexx(client, CallbackQuery, _):
+    menu_next = second_page(_)
+    try:
+        await CallbackQuery.message.edit_text(_["help_1"], reply_markup=menu_next)
+        return
+    except:
+        return
