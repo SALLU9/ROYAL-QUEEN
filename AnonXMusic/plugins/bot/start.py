@@ -60,6 +60,24 @@ STICKER = [
 ]
 
 
+ANNIE_VID = [
+"https://telegra.ph/file/1726f9434ef52f54c12eb.mp4",
+"https://telegra.ph/file/a4d90b0cb759b67d68644.mp4",
+"https://telegra.ph/file/c6c1ac9aee4192a8a3747.mp4",
+"https://telegra.ph/file/2b75449612172a96d4599.mp4",
+"https://telegra.ph/file/0b53cfe4a712af439d50f.mp4",
+"https://telegra.ph/file/64291485c422535f0143d.mp4",
+"https://telegra.ph/file/30ec7c936db6cd2ce7c61.mp4",
+"https://telegra.ph/file/e8bcb814e2c52c11a0f1d.mp4",
+"https://telegra.ph/file/9b7e1b820c72a14d90be7.mp4",
+"https://telegra.ph/file/37d1815385f8244f9a282.mp4"
+
+
+]
+
+
+
+
 @app.on_message(filters.command(["start"]) & filters.private & ~BANNED_USERS)
 @LanguageStart
 async def start_pm(client, message: Message, _):
@@ -186,8 +204,8 @@ async def welcome(client, message: Message):
                     return await app.leave_chat(message.chat.id)
 
                 out = start_panel(_)
-                await message.reply_photo(
-                    photo=config.START_IMG_URL,
+                await message.reply_video(
+                    random.choice(ANNIE_VID),
                     caption=_["start_3"].format(
                         message.from_user.first_name,
                         app.mention,
