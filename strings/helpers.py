@@ -15,7 +15,7 @@ HELP_1 = """<b><u>ᴀᴅᴍɪɴ ᴄᴏᴍᴍᴀɴᴅs :</b></u>
 
 /queue : sʜᴏᴡs ᴛʜᴇ ǫᴜᴇᴜᴇᴅ ᴛʀᴀᴄᴋs ʟɪsᴛ.
 
-✯ᴍᴀᴅᴇ ʙʏ✯ [✭ᴋɪɴɢ✭](https://t.me/InnocentIdkaaa)"""
+✯ᴍᴀᴅᴇ ʙʏ✯ **[✭ᴋɪɴɢ✭](https://t.me/InnocentIdkaaa)"""
 
 HELP_2 = """
 <b><u>ᴀᴜᴛʜ ᴜsᴇʀs :</b></u>
